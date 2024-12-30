@@ -32,10 +32,10 @@ struct ContentView: View {
                 .background(Color.black)
                 .frame(minHeight: 200)
                 .lineLimit(nil)
-                .disabled(true) // Prevents editing
+//                .disabled(true)  Prevents editing
         }
         .onAppear {
-//            runZshCommand()
+            terminalOutput = ""
             startUpdating()
         }
     }
