@@ -54,6 +54,7 @@
     * **Explain Why:** Every time you create a new file or struct, explain *why* it is necessary.
     * **Explain Architecture:** Tell me why you are separating the "Shell Logic" from the "View Logic" (MVVM).
     * **Clean Code:** Prioritize readable, modular code over clever one-liners.
+5. Whenever a feature is implemented, write tests and run them to confirm that it works as intended.
 
 ---
 

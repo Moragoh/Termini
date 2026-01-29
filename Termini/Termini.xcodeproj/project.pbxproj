@@ -10,6 +10,12 @@
 		ED11BD352F2B11750089B7DA /* WidgetKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ED11BD342F2B11750089B7DA /* WidgetKit.framework */; };
 		ED11BD372F2B11750089B7DA /* SwiftUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ED11BD362F2B11750089B7DA /* SwiftUI.framework */; };
 		ED11BD422F2B11760089B7DA /* TerminiWidgetExtension.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = ED11BD322F2B11750089B7DA /* TerminiWidgetExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		ED11BD542F2B18070089B7DA /* SharedDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED11BD512F2B18070089B7DA /* SharedDataManager.swift */; };
+		ED11BD552F2B18070089B7DA /* ANSIParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED11BD502F2B18070089B7DA /* ANSIParser.swift */; };
+		ED11BD562F2B18070089B7DA /* TerminalState.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED11BD522F2B18070089B7DA /* TerminalState.swift */; };
+		ED11BD572F2B18070089B7DA /* SharedDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED11BD512F2B18070089B7DA /* SharedDataManager.swift */; };
+		ED11BD582F2B18070089B7DA /* ANSIParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED11BD502F2B18070089B7DA /* ANSIParser.swift */; };
+		ED11BD592F2B18070089B7DA /* TerminalState.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED11BD522F2B18070089B7DA /* TerminalState.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -58,6 +64,9 @@
 		ED11BD342F2B11750089B7DA /* WidgetKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WidgetKit.framework; path = System/Library/Frameworks/WidgetKit.framework; sourceTree = SDKROOT; };
 		ED11BD362F2B11750089B7DA /* SwiftUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SwiftUI.framework; path = System/Library/Frameworks/SwiftUI.framework; sourceTree = SDKROOT; };
 		ED11BD492F2B12800089B7DA /* TerminiWidgetExtension.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = TerminiWidgetExtension.entitlements; sourceTree = "<group>"; };
+		ED11BD502F2B18070089B7DA /* ANSIParser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ANSIParser.swift; sourceTree = "<group>"; };
+		ED11BD512F2B18070089B7DA /* SharedDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SharedDataManager.swift; sourceTree = "<group>"; };
+		ED11BD522F2B18070089B7DA /* TerminalState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TerminalState.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
@@ -133,6 +142,7 @@
 		ED11BCFB2F2B11310089B7DA = {
 			isa = PBXGroup;
 			children = (
+				ED11BD532F2B18070089B7DA /* Shared */,
 				ED11BD492F2B12800089B7DA /* TerminiWidgetExtension.entitlements */,
 				ED11BD062F2B11310089B7DA /* Termini */,
 				ED11BD142F2B11330089B7DA /* TerminiTests */,
@@ -161,6 +171,16 @@
 				ED11BD362F2B11750089B7DA /* SwiftUI.framework */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		ED11BD532F2B18070089B7DA /* Shared */ = {
+			isa = PBXGroup;
+			children = (
+				ED11BD502F2B18070089B7DA /* ANSIParser.swift */,
+				ED11BD512F2B18070089B7DA /* SharedDataManager.swift */,
+				ED11BD522F2B18070089B7DA /* TerminalState.swift */,
+			);
+			path = Shared;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -342,6 +362,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				ED11BD572F2B18070089B7DA /* SharedDataManager.swift in Sources */,
+				ED11BD582F2B18070089B7DA /* ANSIParser.swift in Sources */,
+				ED11BD592F2B18070089B7DA /* TerminalState.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -363,6 +386,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				ED11BD542F2B18070089B7DA /* SharedDataManager.swift in Sources */,
+				ED11BD552F2B18070089B7DA /* ANSIParser.swift in Sources */,
+				ED11BD562F2B18070089B7DA /* TerminalState.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -517,10 +543,9 @@
 				COMBINE_HIDPI_IMAGES = YES;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 49V6782K87;
-				ENABLE_APP_SANDBOX = YES;
+				ENABLE_APP_SANDBOX = NO;
 				ENABLE_HARDENED_RUNTIME = YES;
 				ENABLE_PREVIEWS = YES;
-				ENABLE_USER_SELECTED_FILES = readonly;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_NSHumanReadableCopyright = "";
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -550,10 +575,9 @@
 				COMBINE_HIDPI_IMAGES = YES;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 49V6782K87;
-				ENABLE_APP_SANDBOX = YES;
+				ENABLE_APP_SANDBOX = NO;
 				ENABLE_HARDENED_RUNTIME = YES;
 				ENABLE_PREVIEWS = YES;
-				ENABLE_USER_SELECTED_FILES = readonly;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_NSHumanReadableCopyright = "";
 				LD_RUNPATH_SEARCH_PATHS = (
