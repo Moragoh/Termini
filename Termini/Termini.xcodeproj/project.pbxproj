@@ -1,0 +1,775 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 77;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		ED11BD352F2B11750089B7DA /* WidgetKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ED11BD342F2B11750089B7DA /* WidgetKit.framework */; };
+		ED11BD372F2B11750089B7DA /* SwiftUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ED11BD362F2B11750089B7DA /* SwiftUI.framework */; };
+		ED11BD422F2B11760089B7DA /* TerminiWidgetExtension.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = ED11BD322F2B11750089B7DA /* TerminiWidgetExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		ED11BD122F2B11330089B7DA /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = ED11BCFC2F2B11310089B7DA /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = ED11BD032F2B11310089B7DA;
+			remoteInfo = Termini;
+		};
+		ED11BD1C2F2B11330089B7DA /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = ED11BCFC2F2B11310089B7DA /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = ED11BD032F2B11310089B7DA;
+			remoteInfo = Termini;
+		};
+		ED11BD402F2B11760089B7DA /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = ED11BCFC2F2B11310089B7DA /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = ED11BD312F2B11750089B7DA;
+			remoteInfo = TerminiWidgetExtension;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		ED11BD472F2B11760089B7DA /* Embed Foundation Extensions */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 13;
+			files = (
+				ED11BD422F2B11760089B7DA /* TerminiWidgetExtension.appex in Embed Foundation Extensions */,
+			);
+			name = "Embed Foundation Extensions";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
+/* Begin PBXFileReference section */
+		ED11BD042F2B11310089B7DA /* Termini.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Termini.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		ED11BD112F2B11330089B7DA /* TerminiTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = TerminiTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		ED11BD1B2F2B11330089B7DA /* TerminiUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = TerminiUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		ED11BD322F2B11750089B7DA /* TerminiWidgetExtension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = TerminiWidgetExtension.appex; sourceTree = BUILT_PRODUCTS_DIR; };
+		ED11BD342F2B11750089B7DA /* WidgetKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WidgetKit.framework; path = System/Library/Frameworks/WidgetKit.framework; sourceTree = SDKROOT; };
+		ED11BD362F2B11750089B7DA /* SwiftUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SwiftUI.framework; path = System/Library/Frameworks/SwiftUI.framework; sourceTree = SDKROOT; };
+		ED11BD492F2B12800089B7DA /* TerminiWidgetExtension.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = TerminiWidgetExtension.entitlements; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
+		ED11BD432F2B11760089B7DA /* Exceptions for "TerminiWidget" folder in "TerminiWidgetExtension" target */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				Info.plist,
+			);
+			target = ED11BD312F2B11750089B7DA /* TerminiWidgetExtension */;
+		};
+/* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
+
+/* Begin PBXFileSystemSynchronizedRootGroup section */
+		ED11BD062F2B11310089B7DA /* Termini */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			path = Termini;
+			sourceTree = "<group>";
+		};
+		ED11BD142F2B11330089B7DA /* TerminiTests */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			path = TerminiTests;
+			sourceTree = "<group>";
+		};
+		ED11BD1E2F2B11330089B7DA /* TerminiUITests */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			path = TerminiUITests;
+			sourceTree = "<group>";
+		};
+		ED11BD382F2B11750089B7DA /* TerminiWidget */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			exceptions = (
+				ED11BD432F2B11760089B7DA /* Exceptions for "TerminiWidget" folder in "TerminiWidgetExtension" target */,
+			);
+			path = TerminiWidget;
+			sourceTree = "<group>";
+		};
+/* End PBXFileSystemSynchronizedRootGroup section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		ED11BD012F2B11310089B7DA /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		ED11BD0E2F2B11330089B7DA /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		ED11BD182F2B11330089B7DA /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		ED11BD2F2F2B11750089B7DA /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				ED11BD372F2B11750089B7DA /* SwiftUI.framework in Frameworks */,
+				ED11BD352F2B11750089B7DA /* WidgetKit.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		ED11BCFB2F2B11310089B7DA = {
+			isa = PBXGroup;
+			children = (
+				ED11BD492F2B12800089B7DA /* TerminiWidgetExtension.entitlements */,
+				ED11BD062F2B11310089B7DA /* Termini */,
+				ED11BD142F2B11330089B7DA /* TerminiTests */,
+				ED11BD1E2F2B11330089B7DA /* TerminiUITests */,
+				ED11BD382F2B11750089B7DA /* TerminiWidget */,
+				ED11BD332F2B11750089B7DA /* Frameworks */,
+				ED11BD052F2B11310089B7DA /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		ED11BD052F2B11310089B7DA /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				ED11BD042F2B11310089B7DA /* Termini.app */,
+				ED11BD112F2B11330089B7DA /* TerminiTests.xctest */,
+				ED11BD1B2F2B11330089B7DA /* TerminiUITests.xctest */,
+				ED11BD322F2B11750089B7DA /* TerminiWidgetExtension.appex */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		ED11BD332F2B11750089B7DA /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				ED11BD342F2B11750089B7DA /* WidgetKit.framework */,
+				ED11BD362F2B11750089B7DA /* SwiftUI.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		ED11BD032F2B11310089B7DA /* Termini */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = ED11BD252F2B11330089B7DA /* Build configuration list for PBXNativeTarget "Termini" */;
+			buildPhases = (
+				ED11BD002F2B11310089B7DA /* Sources */,
+				ED11BD012F2B11310089B7DA /* Frameworks */,
+				ED11BD022F2B11310089B7DA /* Resources */,
+				ED11BD472F2B11760089B7DA /* Embed Foundation Extensions */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				ED11BD412F2B11760089B7DA /* PBXTargetDependency */,
+			);
+			fileSystemSynchronizedGroups = (
+				ED11BD062F2B11310089B7DA /* Termini */,
+			);
+			name = Termini;
+			packageProductDependencies = (
+			);
+			productName = Termini;
+			productReference = ED11BD042F2B11310089B7DA /* Termini.app */;
+			productType = "com.apple.product-type.application";
+		};
+		ED11BD102F2B11330089B7DA /* TerminiTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = ED11BD282F2B11330089B7DA /* Build configuration list for PBXNativeTarget "TerminiTests" */;
+			buildPhases = (
+				ED11BD0D2F2B11330089B7DA /* Sources */,
+				ED11BD0E2F2B11330089B7DA /* Frameworks */,
+				ED11BD0F2F2B11330089B7DA /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				ED11BD132F2B11330089B7DA /* PBXTargetDependency */,
+			);
+			fileSystemSynchronizedGroups = (
+				ED11BD142F2B11330089B7DA /* TerminiTests */,
+			);
+			name = TerminiTests;
+			packageProductDependencies = (
+			);
+			productName = TerminiTests;
+			productReference = ED11BD112F2B11330089B7DA /* TerminiTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		ED11BD1A2F2B11330089B7DA /* TerminiUITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = ED11BD2B2F2B11330089B7DA /* Build configuration list for PBXNativeTarget "TerminiUITests" */;
+			buildPhases = (
+				ED11BD172F2B11330089B7DA /* Sources */,
+				ED11BD182F2B11330089B7DA /* Frameworks */,
+				ED11BD192F2B11330089B7DA /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				ED11BD1D2F2B11330089B7DA /* PBXTargetDependency */,
+			);
+			fileSystemSynchronizedGroups = (
+				ED11BD1E2F2B11330089B7DA /* TerminiUITests */,
+			);
+			name = TerminiUITests;
+			packageProductDependencies = (
+			);
+			productName = TerminiUITests;
+			productReference = ED11BD1B2F2B11330089B7DA /* TerminiUITests.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
+		};
+		ED11BD312F2B11750089B7DA /* TerminiWidgetExtension */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = ED11BD442F2B11760089B7DA /* Build configuration list for PBXNativeTarget "TerminiWidgetExtension" */;
+			buildPhases = (
+				ED11BD2E2F2B11750089B7DA /* Sources */,
+				ED11BD2F2F2B11750089B7DA /* Frameworks */,
+				ED11BD302F2B11750089B7DA /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			fileSystemSynchronizedGroups = (
+				ED11BD382F2B11750089B7DA /* TerminiWidget */,
+			);
+			name = TerminiWidgetExtension;
+			packageProductDependencies = (
+			);
+			productName = TerminiWidgetExtension;
+			productReference = ED11BD322F2B11750089B7DA /* TerminiWidgetExtension.appex */;
+			productType = "com.apple.product-type.app-extension";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		ED11BCFC2F2B11310089B7DA /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				BuildIndependentTargetsInParallel = 1;
+				LastSwiftUpdateCheck = 2620;
+				LastUpgradeCheck = 2620;
+				TargetAttributes = {
+					ED11BD032F2B11310089B7DA = {
+						CreatedOnToolsVersion = 26.2;
+					};
+					ED11BD102F2B11330089B7DA = {
+						CreatedOnToolsVersion = 26.2;
+						TestTargetID = ED11BD032F2B11310089B7DA;
+					};
+					ED11BD1A2F2B11330089B7DA = {
+						CreatedOnToolsVersion = 26.2;
+						TestTargetID = ED11BD032F2B11310089B7DA;
+					};
+					ED11BD312F2B11750089B7DA = {
+						CreatedOnToolsVersion = 26.2;
+					};
+				};
+			};
+			buildConfigurationList = ED11BCFF2F2B11310089B7DA /* Build configuration list for PBXProject "Termini" */;
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = ED11BCFB2F2B11310089B7DA;
+			minimizedProjectReferenceProxies = 1;
+			preferredProjectObjectVersion = 77;
+			productRefGroup = ED11BD052F2B11310089B7DA /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				ED11BD032F2B11310089B7DA /* Termini */,
+				ED11BD102F2B11330089B7DA /* TerminiTests */,
+				ED11BD1A2F2B11330089B7DA /* TerminiUITests */,
+				ED11BD312F2B11750089B7DA /* TerminiWidgetExtension */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		ED11BD022F2B11310089B7DA /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		ED11BD0F2F2B11330089B7DA /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		ED11BD192F2B11330089B7DA /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		ED11BD302F2B11750089B7DA /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		ED11BD002F2B11310089B7DA /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		ED11BD0D2F2B11330089B7DA /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		ED11BD172F2B11330089B7DA /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		ED11BD2E2F2B11750089B7DA /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		ED11BD132F2B11330089B7DA /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = ED11BD032F2B11310089B7DA /* Termini */;
+			targetProxy = ED11BD122F2B11330089B7DA /* PBXContainerItemProxy */;
+		};
+		ED11BD1D2F2B11330089B7DA /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = ED11BD032F2B11310089B7DA /* Termini */;
+			targetProxy = ED11BD1C2F2B11330089B7DA /* PBXContainerItemProxy */;
+		};
+		ED11BD412F2B11760089B7DA /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = ED11BD312F2B11750089B7DA /* TerminiWidgetExtension */;
+			targetProxy = ED11BD402F2B11760089B7DA /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin XCBuildConfiguration section */
+		ED11BD232F2B11330089B7DA /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				DEVELOPMENT_TEAM = 49V6782K87;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				MACOSX_DEPLOYMENT_TARGET = 26.2;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = macosx;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "DEBUG $(inherited)";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		ED11BD242F2B11330089B7DA /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				DEVELOPMENT_TEAM = 49V6782K87;
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				MACOSX_DEPLOYMENT_TARGET = 26.2;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				SDKROOT = macosx;
+				SWIFT_COMPILATION_MODE = wholemodule;
+			};
+			name = Release;
+		};
+		ED11BD262F2B11330089B7DA /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = Termini/Termini.entitlements;
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 49V6782K87;
+				ENABLE_APP_SANDBOX = YES;
+				ENABLE_HARDENED_RUNTIME = YES;
+				ENABLE_PREVIEWS = YES;
+				ENABLE_USER_SELECTED_FILES = readonly;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.growthmetrics.Termini;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				REGISTER_APP_GROUPS = YES;
+				STRING_CATALOG_GENERATE_SYMBOLS = YES;
+				SWIFT_APPROACHABLE_CONCURRENCY = YES;
+				SWIFT_DEFAULT_ACTOR_ISOLATION = MainActor;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_UPCOMING_FEATURE_MEMBER_IMPORT_VISIBILITY = YES;
+				SWIFT_VERSION = 5.0;
+			};
+			name = Debug;
+		};
+		ED11BD272F2B11330089B7DA /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = Termini/Termini.entitlements;
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 49V6782K87;
+				ENABLE_APP_SANDBOX = YES;
+				ENABLE_HARDENED_RUNTIME = YES;
+				ENABLE_PREVIEWS = YES;
+				ENABLE_USER_SELECTED_FILES = readonly;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.growthmetrics.Termini;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				REGISTER_APP_GROUPS = YES;
+				STRING_CATALOG_GENERATE_SYMBOLS = YES;
+				SWIFT_APPROACHABLE_CONCURRENCY = YES;
+				SWIFT_DEFAULT_ACTOR_ISOLATION = MainActor;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_UPCOMING_FEATURE_MEMBER_IMPORT_VISIBILITY = YES;
+				SWIFT_VERSION = 5.0;
+			};
+			name = Release;
+		};
+		ED11BD292F2B11330089B7DA /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 49V6782K87;
+				GENERATE_INFOPLIST_FILE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 26.2;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.growthmetrics.TerminiTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				STRING_CATALOG_GENERATE_SYMBOLS = NO;
+				SWIFT_APPROACHABLE_CONCURRENCY = YES;
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_UPCOMING_FEATURE_MEMBER_IMPORT_VISIBILITY = YES;
+				SWIFT_VERSION = 5.0;
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Termini.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/Termini";
+			};
+			name = Debug;
+		};
+		ED11BD2A2F2B11330089B7DA /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 49V6782K87;
+				GENERATE_INFOPLIST_FILE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 26.2;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.growthmetrics.TerminiTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				STRING_CATALOG_GENERATE_SYMBOLS = NO;
+				SWIFT_APPROACHABLE_CONCURRENCY = YES;
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_UPCOMING_FEATURE_MEMBER_IMPORT_VISIBILITY = YES;
+				SWIFT_VERSION = 5.0;
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Termini.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/Termini";
+			};
+			name = Release;
+		};
+		ED11BD2C2F2B11330089B7DA /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 49V6782K87;
+				GENERATE_INFOPLIST_FILE = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.growthmetrics.TerminiUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				STRING_CATALOG_GENERATE_SYMBOLS = NO;
+				SWIFT_APPROACHABLE_CONCURRENCY = YES;
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_UPCOMING_FEATURE_MEMBER_IMPORT_VISIBILITY = YES;
+				SWIFT_VERSION = 5.0;
+				TEST_TARGET_NAME = Termini;
+			};
+			name = Debug;
+		};
+		ED11BD2D2F2B11330089B7DA /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 49V6782K87;
+				GENERATE_INFOPLIST_FILE = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.growthmetrics.TerminiUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				STRING_CATALOG_GENERATE_SYMBOLS = NO;
+				SWIFT_APPROACHABLE_CONCURRENCY = YES;
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_UPCOMING_FEATURE_MEMBER_IMPORT_VISIBILITY = YES;
+				SWIFT_VERSION = 5.0;
+				TEST_TARGET_NAME = Termini;
+			};
+			name = Release;
+		};
+		ED11BD452F2B11760089B7DA /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				ASSETCATALOG_COMPILER_WIDGET_BACKGROUND_COLOR_NAME = WidgetBackground;
+				CODE_SIGN_ENTITLEMENTS = TerminiWidgetExtension.entitlements;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 49V6782K87;
+				ENABLE_APP_SANDBOX = YES;
+				ENABLE_HARDENED_RUNTIME = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = TerminiWidget/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = TerminiWidget;
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+					"@executable_path/../../../../Frameworks",
+				);
+				MACOSX_DEPLOYMENT_TARGET = 26.2;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.growthmetrics.Termini.TerminiWidget;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				REGISTER_APP_GROUPS = YES;
+				SKIP_INSTALL = YES;
+				STRING_CATALOG_GENERATE_SYMBOLS = YES;
+				SWIFT_APPROACHABLE_CONCURRENCY = YES;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_UPCOMING_FEATURE_MEMBER_IMPORT_VISIBILITY = YES;
+				SWIFT_VERSION = 5.0;
+			};
+			name = Debug;
+		};
+		ED11BD462F2B11760089B7DA /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				ASSETCATALOG_COMPILER_WIDGET_BACKGROUND_COLOR_NAME = WidgetBackground;
+				CODE_SIGN_ENTITLEMENTS = TerminiWidgetExtension.entitlements;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 49V6782K87;
+				ENABLE_APP_SANDBOX = YES;
+				ENABLE_HARDENED_RUNTIME = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = TerminiWidget/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = TerminiWidget;
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+					"@executable_path/../../../../Frameworks",
+				);
+				MACOSX_DEPLOYMENT_TARGET = 26.2;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.growthmetrics.Termini.TerminiWidget;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				REGISTER_APP_GROUPS = YES;
+				SKIP_INSTALL = YES;
+				STRING_CATALOG_GENERATE_SYMBOLS = YES;
+				SWIFT_APPROACHABLE_CONCURRENCY = YES;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_UPCOMING_FEATURE_MEMBER_IMPORT_VISIBILITY = YES;
+				SWIFT_VERSION = 5.0;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		ED11BCFF2F2B11310089B7DA /* Build configuration list for PBXProject "Termini" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				ED11BD232F2B11330089B7DA /* Debug */,
+				ED11BD242F2B11330089B7DA /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		ED11BD252F2B11330089B7DA /* Build configuration list for PBXNativeTarget "Termini" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				ED11BD262F2B11330089B7DA /* Debug */,
+				ED11BD272F2B11330089B7DA /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		ED11BD282F2B11330089B7DA /* Build configuration list for PBXNativeTarget "TerminiTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				ED11BD292F2B11330089B7DA /* Debug */,
+				ED11BD2A2F2B11330089B7DA /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		ED11BD2B2F2B11330089B7DA /* Build configuration list for PBXNativeTarget "TerminiUITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				ED11BD2C2F2B11330089B7DA /* Debug */,
+				ED11BD2D2F2B11330089B7DA /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		ED11BD442F2B11760089B7DA /* Build configuration list for PBXNativeTarget "TerminiWidgetExtension" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				ED11BD452F2B11760089B7DA /* Debug */,
+				ED11BD462F2B11760089B7DA /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = ED11BCFC2F2B11310089B7DA /* Project object */;
+}
