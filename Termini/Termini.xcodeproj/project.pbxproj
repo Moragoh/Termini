@@ -16,6 +16,12 @@
 		ED11BD572F2B18070089B7DA /* SharedDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED11BD512F2B18070089B7DA /* SharedDataManager.swift */; };
 		ED11BD582F2B18070089B7DA /* ANSIParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED11BD502F2B18070089B7DA /* ANSIParser.swift */; };
 		ED11BD592F2B18070089B7DA /* TerminalState.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED11BD522F2B18070089B7DA /* TerminalState.swift */; };
+		ED8BD7222F2ECBD30030DD04 /* TerminalBuffer.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED8BD7202F2ECBD30030DD04 /* TerminalBuffer.swift */; };
+		ED8BD7232F2ECBD30030DD04 /* TerminalCommand.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED8BD7212F2ECBD30030DD04 /* TerminalCommand.swift */; };
+		ED8BD7242F2ECBD30030DD04 /* CellAttributes.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED8BD71F2F2ECBD30030DD04 /* CellAttributes.swift */; };
+		ED8BD7252F2ECBD30030DD04 /* TerminalBuffer.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED8BD7202F2ECBD30030DD04 /* TerminalBuffer.swift */; };
+		ED8BD7262F2ECBD30030DD04 /* TerminalCommand.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED8BD7212F2ECBD30030DD04 /* TerminalCommand.swift */; };
+		ED8BD7272F2ECBD30030DD04 /* CellAttributes.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED8BD71F2F2ECBD30030DD04 /* CellAttributes.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -67,6 +73,9 @@
 		ED11BD502F2B18070089B7DA /* ANSIParser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ANSIParser.swift; sourceTree = "<group>"; };
 		ED11BD512F2B18070089B7DA /* SharedDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SharedDataManager.swift; sourceTree = "<group>"; };
 		ED11BD522F2B18070089B7DA /* TerminalState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TerminalState.swift; sourceTree = "<group>"; };
+		ED8BD71F2F2ECBD30030DD04 /* CellAttributes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CellAttributes.swift; sourceTree = "<group>"; };
+		ED8BD7202F2ECBD30030DD04 /* TerminalBuffer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TerminalBuffer.swift; sourceTree = "<group>"; };
+		ED8BD7212F2ECBD30030DD04 /* TerminalCommand.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TerminalCommand.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
@@ -176,6 +185,9 @@
 		ED11BD532F2B18070089B7DA /* Shared */ = {
 			isa = PBXGroup;
 			children = (
+				ED8BD71F2F2ECBD30030DD04 /* CellAttributes.swift */,
+				ED8BD7202F2ECBD30030DD04 /* TerminalBuffer.swift */,
+				ED8BD7212F2ECBD30030DD04 /* TerminalCommand.swift */,
 				ED11BD502F2B18070089B7DA /* ANSIParser.swift */,
 				ED11BD512F2B18070089B7DA /* SharedDataManager.swift */,
 				ED11BD522F2B18070089B7DA /* TerminalState.swift */,
@@ -362,6 +374,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				ED8BD7222F2ECBD30030DD04 /* TerminalBuffer.swift in Sources */,
+				ED8BD7232F2ECBD30030DD04 /* TerminalCommand.swift in Sources */,
+				ED8BD7242F2ECBD30030DD04 /* CellAttributes.swift in Sources */,
 				ED11BD572F2B18070089B7DA /* SharedDataManager.swift in Sources */,
 				ED11BD582F2B18070089B7DA /* ANSIParser.swift in Sources */,
 				ED11BD592F2B18070089B7DA /* TerminalState.swift in Sources */,
@@ -386,6 +401,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				ED8BD7252F2ECBD30030DD04 /* TerminalBuffer.swift in Sources */,
+				ED8BD7262F2ECBD30030DD04 /* TerminalCommand.swift in Sources */,
+				ED8BD7272F2ECBD30030DD04 /* CellAttributes.swift in Sources */,
 				ED11BD542F2B18070089B7DA /* SharedDataManager.swift in Sources */,
 				ED11BD552F2B18070089B7DA /* ANSIParser.swift in Sources */,
 				ED11BD562F2B18070089B7DA /* TerminalState.swift in Sources */,

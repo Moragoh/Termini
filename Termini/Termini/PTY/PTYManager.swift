@@ -102,10 +102,11 @@ final class PTYManager {
             setenv("LANG", "en_US.UTF-8", 1)
             setenv("LC_ALL", "en_US.UTF-8", 1)
 
-            // Execute the shell using execv (avoids nil type issues with execl)
-            let shell = "/bin/zsh"
+            // Disable zsh's partial line marker (the '%' shown at startup)
+            setenv("PROMPT_EOL_MARK", "", 1)
 
-            // Build null-terminated argument array for execv
+            // Execute the shell
+            let shell = "/bin/zsh"
             let arg0 = strdup(shell)
             let arg1 = strdup("--login")
             var args: [UnsafeMutablePointer<CChar>?] = [arg0, arg1, nil]

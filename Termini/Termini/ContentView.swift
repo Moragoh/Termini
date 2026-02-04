@@ -46,7 +46,7 @@ struct ContentView: View {
         ScrollViewReader { proxy in
             ScrollView {
                 VStack(alignment: .leading, spacing: 0) {
-                    // Display the parsed ANSI output
+                    // Display the terminal output
                     Text(viewModel.attributedOutput)
                         .font(.system(.body, design: .monospaced))
                         .textSelection(.enabled)
@@ -60,9 +60,12 @@ struct ContentView: View {
                 .padding(8)
             }
             .onChange(of: viewModel.attributedOutput) { _, _ in
-                // Auto-scroll to bottom when new output arrives
-                withAnimation(.easeOut(duration: 0.1)) {
-                    proxy.scrollTo("bottom", anchor: .bottom)
+                // Only auto-scroll when NOT in alternate screen mode.
+                // TUI apps (vim, htop) manage their own display and shouldn't scroll.
+                if !viewModel.isAlternateScreenActive {
+                    withAnimation(.easeOut(duration: 0.1)) {
+                        proxy.scrollTo("bottom", anchor: .bottom)
+                    }
                 }
             }
         }
@@ -90,6 +93,14 @@ struct ContentView: View {
                     // Send Ctrl+C on Escape
                     viewModel.sendControl("c")
                     return .handled
+                }
+                .onKeyPress(characters: .init(charactersIn: "c"), phases: .down) { keyPress in
+                    // Ctrl+C sends interrupt signal (SIGINT) to terminate running command
+                    if keyPress.modifiers.contains(.control) {
+                        viewModel.sendControl("c")
+                        return .handled
+                    }
+                    return .ignored
                 }
         }
         .padding(.horizontal, 8)

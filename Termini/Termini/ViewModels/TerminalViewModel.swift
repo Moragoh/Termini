@@ -6,7 +6,7 @@
 //           between the PTY (shell) and the View (UI).
 //
 //  MVVM Architecture:
-//  - Model: TerminalState, PTYManager (data and business logic)
+//  - Model: TerminalState, PTYManager, TerminalEmulator (data and business logic)
 //  - ViewModel: This file (connects Model to View, manages UI state)
 //  - View: ContentView (displays UI, sends user actions)
 //
@@ -24,16 +24,18 @@ import WidgetKit
 ///
 /// ObservableObject + @Published allows SwiftUI to automatically
 /// update the view when these properties change.
-@MainActor
 final class TerminalViewModel: ObservableObject {
 
     // MARK: - Published Properties (UI State)
 
+    /// Counter that increments on every update (for debugging SwiftUI reactivity)
+    @Published var updateCounter: Int = 0
+
     /// The terminal output as styled text, ready for display.
     @Published var attributedOutput: AttributedString = AttributedString()
 
-    /// The raw output text (with ANSI codes) - kept for debugging and sharing.
-    @Published private(set) var rawOutput: String = ""
+    /// Plain text output for debugging
+    @Published var plainTextOutput: String = ""
 
     /// Current user input being typed (before pressing Enter).
     @Published var currentInput: String = ""
@@ -41,10 +43,19 @@ final class TerminalViewModel: ObservableObject {
     /// Whether the shell is currently running.
     @Published private(set) var isRunning: Bool = false
 
+    /// Whether we're currently in the alternate screen buffer (TUI apps like vim).
+    @Published private(set) var isAlternateScreenActive: Bool = false
+
+    /// Current cursor position in the terminal.
+    @Published private(set) var cursorPosition: CursorPosition = .origin
+
     /// Error message to display, if any.
     @Published var errorMessage: String?
 
     // MARK: - Private Properties
+
+    /// The terminal emulator with 2D buffer and cursor tracking.
+    private let emulator: TerminalEmulator
 
     /// The PTY manager that runs the shell.
     private let ptyManager = PTYManager()
@@ -56,13 +67,14 @@ final class TerminalViewModel: ObservableObject {
     /// We don't want to write to disk on every single character.
     private var saveWorkItem: DispatchWorkItem?
 
-    /// Maximum number of characters to keep in output buffer.
-    /// Prevents memory issues with very long sessions.
-    private let maxOutputLength = 50_000
+    /// Terminal dimensions.
+    private var terminalRows: Int = 24
+    private var terminalColumns: Int = 80
 
     // MARK: - Initialization
 
     init() {
+        self.emulator = TerminalEmulator(rows: terminalRows, columns: terminalColumns)
         setupPTYCallbacks()
     }
 
@@ -109,15 +121,19 @@ final class TerminalViewModel: ObservableObject {
         ptyManager.sendByte(UInt8(controlCode))
     }
 
-    /// Notifies the PTY of a window size change.
+    /// Notifies the PTY and emulator of a window size change.
     func resize(columns: Int, rows: Int) {
+        terminalColumns = columns
+        terminalRows = rows
         ptyManager.resize(columns: columns, rows: rows)
+        emulator.resize(rows: rows, columns: columns)
+        renderOutput()
     }
 
     /// Clears the terminal output.
     func clear() {
-        rawOutput = ""
-        attributedOutput = AttributedString()
+        emulator.reset()
+        renderOutput()
         saveToSharedData()
     }
 
@@ -125,6 +141,7 @@ final class TerminalViewModel: ObservableObject {
 
     /// Sets up callbacks from the PTY manager.
     private func setupPTYCallbacks() {
+        // Note: PTYManager already dispatches these callbacks to main thread
         ptyManager.onOutput = { [weak self] text in
             self?.handleOutput(text)
         }
@@ -134,22 +151,49 @@ final class TerminalViewModel: ObservableObject {
         }
     }
 
-    /// Handles new output from the shell.
+    /// Handles new output from the shell using command-based parsing.
     private func handleOutput(_ text: String) {
-        // Append to raw output
-        rawOutput += text
+        // DEBUG: Print what we received from the shell
+        print("[DEBUG] Received \(text.count) chars: \(text.debugDescription)")
 
-        // Trim if too long (keep the end, discard the beginning)
-        if rawOutput.count > maxOutputLength {
-            let startIndex = rawOutput.index(rawOutput.endIndex, offsetBy: -maxOutputLength)
-            rawOutput = String(rawOutput[startIndex...])
+        // Parse raw output into terminal commands
+        let commands = ANSIParser.parseToCommands(text)
+
+        // DEBUG: Print each parsed command
+        print("[DEBUG] Parsed \(commands.count) commands:")
+        for (i, cmd) in commands.enumerated() {
+            print("[DEBUG]   [\(i)] \(cmd)")
         }
 
-        // Parse ANSI codes and update styled output
-        attributedOutput = ANSIParser.parse(rawOutput)
+        // Execute each command on the emulator
+        print("[DEBUG] Cursor before execution: row=\(emulator.activeBuffer.cursor.row) col=\(emulator.activeBuffer.cursor.column)")
+        for (i, cmd) in commands.enumerated() {
+            emulator.execute(cmd)
+            print("[DEBUG]   After cmd[\(i)]: cursor row=\(emulator.activeBuffer.cursor.row) col=\(emulator.activeBuffer.cursor.column)")
+        }
+
+        // Update published state
+        isAlternateScreenActive = emulator.isUsingAlternateBuffer
+        cursorPosition = emulator.cursorPosition
+
+        // Re-render the display
+        renderOutput()
+
+        // DEBUG: Print buffer state
+        print("[DEBUG] Buffer cursor: row=\(emulator.activeBuffer.cursor.row) col=\(emulator.activeBuffer.cursor.column)")
+        print("[DEBUG] Plain text output: \"\(emulator.toPlainText())\"")
 
         // Schedule save to shared data (debounced)
         scheduleSaveToSharedData()
+    }
+
+    /// Renders the emulator's buffer to the published output properties.
+    private func renderOutput() {
+        // Force SwiftUI to see the update by explicitly triggering objectWillChange
+        objectWillChange.send()
+        updateCounter += 1
+        plainTextOutput = emulator.toPlainText()
+        attributedOutput = emulator.toAttributedString()
     }
 
     /// Saves current state to shared data for the widget.
@@ -161,11 +205,9 @@ final class TerminalViewModel: ObservableObject {
             self?.saveToSharedData()
         }
 
-        // Wait 1 second before saving (debounce).
-        // This balances responsiveness with avoiding excessive disk I/O.
-        // Since Apple throttles widget refreshes anyway, more frequent
-        // saves don't help the widget update faster.
-        DispatchQueue.main.asyncAfter(deadline: .now() + 1.0, execute: saveWorkItem!)
+        // Wait 5 seconds before saving (debounce).
+        // This reduces spam to macOS widget system which throttles frequent requests.
+        DispatchQueue.main.asyncAfter(deadline: .now() + 5.0, execute: saveWorkItem!)
     }
 
     /// Actually saves the state to shared data.
@@ -173,8 +215,18 @@ final class TerminalViewModel: ObservableObject {
         // Get current working directory from environment if possible
         let cwd = FileManager.default.currentDirectoryPath
 
+        // Get plain text output from the emulator
+        // Only save primary buffer content to widget (not alternate screen content)
+        let plainOutput: String
+        if emulator.isUsingAlternateBuffer {
+            // When in alternate screen (vim, htop), show a message in widget
+            plainOutput = "[TUI application running]"
+        } else {
+            plainOutput = emulator.toPlainText()
+        }
+
         let state = TerminalState(
-            outputText: rawOutput,
+            outputText: plainOutput,
             timestamp: Date(),
             currentDirectory: cwd,
             isExecutingCommand: false
