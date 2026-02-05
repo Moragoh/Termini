@@ -266,13 +266,13 @@ struct ANSIParser {
             }
 
             // Check for control characters
-            if let controlCommand = parseControlCharacter(char) {
+            if let controlCommands = parseControlCharacter(char) {
                 // Flush plain text
                 if !currentRun.isEmpty {
                     commands.append(.printString(currentRun))
                     currentRun = ""
                 }
-                commands.append(controlCommand)
+                commands.append(contentsOf: controlCommands)
                 index = rawText.index(after: index)
                 continue
             }
@@ -291,18 +291,22 @@ struct ANSIParser {
     }
 
     /// Parses a control character into a command.
-    private static func parseControlCharacter(_ char: Character) -> TerminalCommand? {
+    /// Returns an array because CRLF (\r\n) is treated as a single Character in Swift
+    /// but needs to produce two commands.
+    private static func parseControlCharacter(_ char: Character) -> [TerminalCommand]? {
         switch char {
+        case "\r\n":    // CRLF - Swift treats this as a single grapheme cluster
+            return [.carriageReturn, .lineFeed]
         case "\r":      // Carriage Return
-            return .carriageReturn
+            return [.carriageReturn]
         case "\n":      // Line Feed
-            return .lineFeed
+            return [.lineFeed]
         case "\u{08}":  // Backspace
-            return .backspace
+            return [.backspace]
         case "\t":      // Tab
-            return .tab
+            return [.tab]
         case "\u{07}":  // Bell
-            return .bell
+            return [.bell]
         default:
             return nil
         }

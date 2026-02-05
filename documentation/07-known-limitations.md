@@ -50,59 +50,39 @@ This reduces unnecessary refresh requests while still updating reasonably quickl
 
 ## Carriage Return Handling
 
-### The Limitation
+### Current Status: Implemented
 
-Progress indicators and spinners that use carriage return (`\r`) to update in place will display as multiple lines instead.
+Termini now includes a full terminal buffer with cursor tracking (`TerminalBuffer`) that properly handles carriage returns and line feeds.
 
-### Example
-
-A download progress indicator like:
-```
-Downloading... 50%
-Downloading... 75%
-Downloading... 100%
-```
-
-May appear in Termini as:
-```
-Downloading... 50%
-Downloading... 75%
-Downloading... 100%
-```
-
-Instead of updating a single line.
-
-### Why It Exists
-
-Proper carriage return handling requires a full terminal state machine with:
-- Cursor position tracking (row and column)
-- Line buffer management
-- Character overwrite logic
-
-Termini uses a simplified append-based model for output.
-
-### Technical Background
+### How It Works
 
 When a program outputs:
 ```
 Progress: 50%\rProgress: 75%\r
 ```
 
-A full terminal emulator:
-1. Prints "Progress: 50%"
-2. Moves cursor to start of line (doesn't erase)
-3. Prints "Progress: 75%" overwriting characters
+Termini:
+1. Prints "Progress: 50%" at the cursor position
+2. `.carriageReturn` moves cursor to column 0 (same row)
+3. Prints "Progress: 75%" overwriting the previous text
 
-Termini currently:
-1. Appends all text to buffer
-2. Strips `\r` characters during preprocessing
-3. Results in accumulated output
+### Swift CRLF Quirk
 
-### Workaround
+**Important implementation detail:** Swift treats `\r\n` (CRLF) as a single `Character` (grapheme cluster) when iterating over strings. This means:
 
-Programs that use full screen clearing (like vim, htop) work correctly because they use escape sequences that Termini does detect:
-- `ESC[2J` — Clear entire screen
-- `ESC[H` — Cursor to home position
+```swift
+let s = "hello\r\n"
+print(s.count)  // Prints 6, not 7!
+```
+
+The `ANSIParser.parseControlCharacter()` method handles this by explicitly checking for the combined `"\r\n"` character and returning both `.carriageReturn` and `.lineFeed` commands:
+
+```swift
+case "\r\n":    // CRLF - Swift treats as single grapheme cluster
+    return [.carriageReturn, .lineFeed]
+```
+
+Without this fix, CRLF sequences would be treated as printable text and written to the buffer, causing command output to not display correctly.
 
 ---
 
@@ -146,16 +126,18 @@ The SwiftUI view doesn't currently calculate and report its actual size to the P
 | Ligatures | Not implemented | Monospace font without ligatures |
 | Images (iTerm2 protocol) | Not implemented | Text-only output |
 
-### ANSI Codes Not Supported
+### ANSI Codes Support Status
 
 | Category | Examples | Status |
 |----------|----------|--------|
-| Cursor movement | `ESC[A`, `ESC[B`, `ESC[C`, `ESC[D` | Stripped (not rendered) |
-| Cursor position | `ESC[H`, `ESC[;H` | Detected for screen clear only |
-| Erase operations | `ESC[K`, `ESC[J` | `ESC[2J` detected, others stripped |
-| Scrolling | `ESC[S`, `ESC[T` | Not implemented |
-| Private modes | `ESC[?1049h` (alt screen) | Stripped |
-| Mouse tracking | `ESC[?1000h` | Stripped |
+| Cursor movement | `ESC[A`, `ESC[B`, `ESC[C`, `ESC[D` | **Implemented** |
+| Cursor position | `ESC[H`, `ESC[n;mH` | **Implemented** |
+| Erase operations | `ESC[K`, `ESC[J` | **Implemented** |
+| Scrolling | `ESC[S`, `ESC[T` | **Implemented** |
+| Alternate screen | `ESC[?1049h/l` | **Implemented** |
+| Bracketed paste | `ESC[?2004h/l` | **Implemented** (mode tracked) |
+| Mouse tracking | `ESC[?1000h` | Not implemented |
+| True color (24-bit) | `ESC[38;2;r;g;bm` | **Implemented** |
 
 ---
 
@@ -175,7 +157,7 @@ Some shell features may behave differently than in a full terminal emulator.
 | Arrow keys in vim | Works (application sends escape sequences) |
 | Ctrl+Z (suspend) | Works (SIGTSTP sent to foreground process) |
 | Job control (`fg`, `bg`) | Works |
-| Bracketed paste | Disabled (sequences stripped) |
+| Bracketed paste | Mode tracked, sequences parsed |
 
 ---
 
@@ -216,12 +198,22 @@ Termini is macOS-only because:
 
 ---
 
+## Recently Implemented
+
+The following features have been added:
+
+1. **Cursor tracking** — Full terminal state machine with `TerminalBuffer` for proper cursor position tracking
+2. **True color** — RGB color support via `ESC[38;2;r;g;bm` sequences
+3. **Alternate screen buffer** — Dual buffer support for TUI applications (vim, htop)
+4. **Proper CRLF handling** — Swift treats `\r\n` as a single Character; parser now handles this correctly
+
+---
+
 ## Future Improvements
 
-Potential enhancements that could address some limitations:
+Potential enhancements that could address remaining limitations:
 
-1. **Cursor tracking** — Full terminal state machine for proper `\r` handling
-2. **Dynamic sizing** — Report actual view size to PTY
-3. **True color** — Parse `ESC[38;2;r;g;bm` sequences
-4. **Multiple sessions** — Tab support for multiple terminals
-5. **Scrollback search** — Find text in output history
+1. **Dynamic sizing** — Report actual view size to PTY
+2. **Multiple sessions** — Tab support for multiple terminals
+3. **Scrollback search** — Find text in output history
+4. **Mouse support** — Translate mouse events for TUI applications

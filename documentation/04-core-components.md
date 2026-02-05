@@ -120,7 +120,7 @@ setenv("PROMPT_EOL_MARK", "", 1)       // Disable zsh's '%' marker
 
 **File:** `Shared/ANSIParser.swift`
 
-Converts raw terminal output containing ANSI escape codes into styled `AttributedString`.
+Converts raw terminal output containing ANSI escape codes into `TerminalCommand` sequences for execution by the emulator.
 
 ### What are ANSI Escape Codes?
 
@@ -139,8 +139,40 @@ The escape character is `\u{1B}` (ASCII 27), also written as `ESC` or `^[`.
 
 ```swift
 struct ANSIParser {
+    // Command-based parsing (primary API for terminal emulation)
+    static func parseToCommands(_ rawText: String) -> [TerminalCommand]
+
+    // Legacy API for simple AttributedString conversion
     static func parse(_ rawText: String) -> AttributedString
     static func stripCodes(_ rawText: String) -> String
+}
+```
+
+### Command-Based Parsing
+
+The `parseToCommands()` method converts raw terminal output into a sequence of `TerminalCommand` objects that the `TerminalEmulator` executes. This approach properly handles:
+
+- Control characters (`\r`, `\n`, `\t`, backspace, bell)
+- Cursor movement sequences
+- Screen/line clearing
+- Text attributes (colors, bold, italic, etc.)
+- Screen buffer switching (for TUI apps)
+
+### Swift CRLF Handling
+
+**Important:** Swift treats `\r\n` (CRLF) as a single grapheme cluster when iterating over `Character` values. The parser handles this by checking for the combined `"\r\n"` character and emitting both `.carriageReturn` and `.lineFeed` commands:
+
+```swift
+private static func parseControlCharacter(_ char: Character) -> [TerminalCommand]? {
+    switch char {
+    case "\r\n":    // CRLF - Swift treats as single Character
+        return [.carriageReturn, .lineFeed]
+    case "\r":
+        return [.carriageReturn]
+    case "\n":
+        return [.lineFeed]
+    // ...
+    }
 }
 ```
 
@@ -185,19 +217,30 @@ struct ANSIParser {
 - 16-231: 6×6×6 color cube
 - 232-255: Grayscale (24 shades)
 
-### Preprocessing
+### Supported Control Characters
 
-Before parsing colors, control sequences are removed:
+| Character | Command Generated | Action |
+|-----------|-------------------|--------|
+| `\r` | `.carriageReturn` | Move cursor to column 0 |
+| `\n` | `.lineFeed` | Move cursor down, scroll if at bottom |
+| `\r\n` | `.carriageReturn`, `.lineFeed` | Both (Swift CRLF handling) |
+| `\t` | `.tab` | Move to next tab stop |
+| `\b` | `.backspace` | Move cursor left one column |
+| `\x07` | `.bell` | System beep |
 
-| Sequence Type | Example | Action |
-|---------------|---------|--------|
-| Bracketed paste mode | `ESC[?2004h` | Remove |
-| Cursor visibility | `ESC[?25h` | Remove |
-| Cursor movement | `ESC[H`, `ESC[A` | Remove |
-| Screen clear | `ESC[2J` | Remove |
-| OSC (window title) | `ESC]0;title^G` | Remove |
-| Backspace | `\b` | Remove with preceding char |
-| Carriage return | `\r` | Remove |
+### Supported CSI Sequences
+
+| Sequence | Command Generated | Action |
+|----------|-------------------|--------|
+| `ESC[?2004h/l` | `.bracketedPasteMode` | Enable/disable bracketed paste |
+| `ESC[?25h/l` | `.showCursor`/`.hideCursor` | Cursor visibility |
+| `ESC[?1049h/l` | `.switchToAlternateScreen`/`.switchToPrimaryScreen` | Buffer switching |
+| `ESC[nA/B/C/D` | `.cursorUp/Down/Forward/Back` | Cursor movement |
+| `ESC[H` | `.cursorHome` | Cursor to origin |
+| `ESC[n;mH` | `.cursorPosition` | Cursor to row/column |
+| `ESC[J` | `.eraseInDisplay` | Clear screen |
+| `ESC[K` | `.eraseInLine` | Clear line |
+| `ESC[...m` | `.setAttribute` | Text styling (SGR) |
 
 ---
 

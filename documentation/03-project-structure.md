@@ -104,7 +104,7 @@ These files are only used by the widget:
 |------|---------|
 | **TerminalState.swift** | `Codable` struct representing terminal state. Contains output text, timestamp, working directory, and execution status. |
 | **SharedDataManager.swift** | Singleton that reads/writes `TerminalState` to the App Group container as JSON. |
-| **ANSIParser.swift** | Parses ANSI escape codes into SwiftUI `AttributedString`. Handles colors, styles, and control sequence stripping. |
+| **ANSIParser.swift** | Parses ANSI escape codes into `TerminalCommand` sequences. Handles colors, styles, cursor movement, and control characters. |
 
 ### Widget Extension
 
