@@ -67,6 +67,9 @@ final class TerminalViewModel: ObservableObject {
     /// We don't want to write to disk on every single character.
     private var saveWorkItem: DispatchWorkItem?
 
+    /// Tracks when we last saved to shared data (for throttling).
+    private var lastSaveTime: Date = .distantPast
+
     /// Terminal dimensions.
     private var terminalRows: Int = 24
     private var terminalColumns: Int = 80
@@ -197,21 +200,34 @@ final class TerminalViewModel: ObservableObject {
     }
 
     /// Saves current state to shared data for the widget.
-    /// Debounced to avoid excessive disk writes.
+    /// Throttled to avoid excessive disk writes while ensuring updates happen.
     private func scheduleSaveToSharedData() {
-        saveWorkItem?.cancel()
+        let throttleInterval: TimeInterval = 10.0
+        let timeSinceLastSave = Date().timeIntervalSince(lastSaveTime)
 
+        // If enough time has passed, save immediately
+        if timeSinceLastSave >= throttleInterval {
+            saveToSharedData()
+            return
+        }
+
+        // Otherwise, schedule a save for when the throttle window ends
+        // (but only if one isn't already scheduled)
+        guard saveWorkItem == nil else { return }
+
+        let delay = throttleInterval - timeSinceLastSave
         saveWorkItem = DispatchWorkItem { [weak self] in
+            self?.saveWorkItem = nil
             self?.saveToSharedData()
         }
 
-        // Wait 5 seconds before saving (debounce).
-        // This reduces spam to macOS widget system which throttles frequent requests.
-        DispatchQueue.main.asyncAfter(deadline: .now() + 5.0, execute: saveWorkItem!)
+        DispatchQueue.main.asyncAfter(deadline: .now() + delay, execute: saveWorkItem!)
     }
 
     /// Actually saves the state to shared data.
     private func saveToSharedData() {
+        lastSaveTime = Date()
+
         // Get current working directory from environment if possible
         let cwd = FileManager.default.currentDirectoryPath
 

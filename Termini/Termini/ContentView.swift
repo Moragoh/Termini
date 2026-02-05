@@ -47,10 +47,14 @@ struct ContentView: View {
             ScrollView {
                 VStack(alignment: .leading, spacing: 0) {
                     // Display the terminal output
+                    // The .id(updateCounter) forces SwiftUI to recreate the Text view
+                    // on every update, which is necessary for apps that rapidly clear
+                    // and redraw the screen (like pomodoro timers, progress bars, etc.)
                     Text(viewModel.attributedOutput)
                         .font(.system(.body, design: .monospaced))
                         .textSelection(.enabled)
                         .frame(maxWidth: .infinity, alignment: .leading)
+                        .id(viewModel.updateCounter)
 
                     // Invisible anchor for auto-scrolling
                     Color.clear
@@ -92,15 +96,33 @@ struct ContentView: View {
                 .onKeyPress(.escape) {
                     // Send Ctrl+C on Escape
                     viewModel.sendControl("c")
+                    viewModel.currentInput = ""
                     return .handled
                 }
                 .onKeyPress(characters: .init(charactersIn: "c"), phases: .down) { keyPress in
                     // Ctrl+C sends interrupt signal (SIGINT) to terminate running command
                     if keyPress.modifiers.contains(.control) {
                         viewModel.sendControl("c")
+                        viewModel.currentInput = ""
                         return .handled
                     }
                     return .ignored
+                }
+                .onKeyPress(.upArrow) {
+                    viewModel.send("\u{1B}[A")
+                    return .handled
+                }
+                .onKeyPress(.downArrow) {
+                    viewModel.send("\u{1B}[B")
+                    return .handled
+                }
+                .onKeyPress(.rightArrow) {
+                    viewModel.send("\u{1B}[C")
+                    return .handled
+                }
+                .onKeyPress(.leftArrow) {
+                    viewModel.send("\u{1B}[D")
+                    return .handled
                 }
         }
         .padding(.horizontal, 8)
