@@ -63,6 +63,9 @@ final class TerminalViewModel: ObservableObject {
     /// Shared data manager for widget communication.
     private let sharedData = SharedDataManager.shared
 
+    /// Widget reload manager - handles throttling and visibility-based intervals.
+    private let widgetReloadManager = WidgetReloadManager.shared
+
     /// Limits how often we save to shared data (for widget).
     /// We don't want to write to disk on every single character.
     private var saveWorkItem: DispatchWorkItem?
@@ -137,7 +140,7 @@ final class TerminalViewModel: ObservableObject {
     func clear() {
         emulator.reset()
         renderOutput()
-        saveToSharedData()
+        saveToSharedData(force: true)  // Force immediate update on explicit clear
     }
 
     // MARK: - Private Methods
@@ -225,7 +228,8 @@ final class TerminalViewModel: ObservableObject {
     }
 
     /// Actually saves the state to shared data.
-    private func saveToSharedData() {
+    /// - Parameter force: If true, forces immediate widget reload (bypasses debouncing).
+    private func saveToSharedData(force: Bool = false) {
         lastSaveTime = Date()
 
         // Get current working directory from environment if possible
@@ -251,11 +255,13 @@ final class TerminalViewModel: ObservableObject {
         do {
             try sharedData.save(state: state)
 
-            // Tell the widget to refresh.
-            // Note: Apple still throttles this, but it's more responsive
-            // than time-based polling. The widget will update "soon" after
-            // this call, but not instantly.
-            WidgetCenter.shared.reloadTimelines(ofKind: "TerminiWidget")
+            // Request widget reload through the manager.
+            // The manager handles throttling based on app visibility:
+            // - Foreground: allows reloads every 30 seconds
+            // - Background: throttles to every 20 minutes
+            // This preserves the daily widget budget while keeping
+            // the widget responsive when the user is actively using the app.
+            widgetReloadManager.requestReload(force: force)
         } catch {
             print("Failed to save shared data: \(error)")
         }

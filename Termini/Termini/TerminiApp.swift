@@ -56,4 +56,27 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         }
         return true
     }
+
+    /// Called when the app is asked to open URLs (e.g. from widget tap).
+    /// This fires at the app level regardless of window state.
+    func application(_ application: NSApplication, open urls: [URL]) {
+        bringWindowToFront()
+    }
+
+    /// Called when the app becomes active (e.g. from widget tap, dock click).
+    /// Ensures minimized windows are restored, since `application(_:open:)`
+    /// may not fire reliably when the app is already running.
+    func applicationDidBecomeActive(_ notification: Notification) {
+        bringWindowToFront()
+    }
+
+    private func bringWindowToFront() {
+        for window in NSApplication.shared.windows {
+            if window.isMiniaturized {
+                window.deminiaturize(nil)
+            }
+            window.makeKeyAndOrderFront(nil)
+        }
+        NSApplication.shared.activate(ignoringOtherApps: true)
+    }
 }

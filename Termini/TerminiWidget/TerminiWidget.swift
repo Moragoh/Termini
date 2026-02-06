@@ -176,9 +176,11 @@ struct TerminiWidget: Widget {
         StaticConfiguration(kind: kind, provider: Provider()) { entry in
             if #available(macOS 14.0, *) {
                 TerminiWidgetEntryView(entry: entry)
+                    .widgetURL(URL(string: "termini://open"))
                     .containerBackground(Color.black, for: .widget)
             } else {
                 TerminiWidgetEntryView(entry: entry)
+                    .widgetURL(URL(string: "termini://open"))
                     .padding()
                     .background(Color.black)
             }

@@ -29,6 +29,9 @@ struct ContentView: View {
             inputView
         }
         .background(Color.black)
+        .onTapGesture {
+            isInputFocused = true
+        }
         .onAppear {
             viewModel.start()
             isInputFocused = true
