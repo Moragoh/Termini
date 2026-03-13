@@ -60,7 +60,10 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     /// Called when the app is asked to open URLs (e.g. from widget tap).
     /// This fires at the app level regardless of window state.
     func application(_ application: NSApplication, open urls: [URL]) {
-        bringWindowToFront()
+        // If the app was just cold-launched (e.g. killed after days of inactivity),
+        // WindowGroup may not have created its window yet. Retry a few times to
+        // give SwiftUI time to initialise the window before bringing it forward.
+        bringWindowToFrontWithRetry()
     }
 
     /// Called when the app becomes active (e.g. from widget tap, dock click).
@@ -68,6 +71,17 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     /// may not fire reliably when the app is already running.
     func applicationDidBecomeActive(_ notification: Notification) {
         bringWindowToFront()
+    }
+
+    private func bringWindowToFrontWithRetry(attempts: Int = 10) {
+        if !NSApplication.shared.windows.isEmpty {
+            bringWindowToFront()
+        } else if attempts > 0 {
+            // Window not ready yet — try again after a short delay
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) { [weak self] in
+                self?.bringWindowToFrontWithRetry(attempts: attempts - 1)
+            }
+        }
     }
 
     private func bringWindowToFront() {
