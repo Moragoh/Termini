@@ -14,7 +14,7 @@ struct TerminiApp: App {
     @NSApplicationDelegateAdaptor(AppDelegate.self) var appDelegate
 
     var body: some Scene {
-        WindowGroup {
+        Window("Termini", id: "main") {
             ContentView()
                 .frame(minWidth: 400, minHeight: 300)
         }
